@@ -1,6 +1,7 @@
 "use strict";
 
 import React from "react";
+import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 
 import { picAdd } from "../../actions/pics-actions";
@@ -15,6 +16,7 @@ class WallContainer extends React.Component {
 
   constructor(props) {
     super(props);
+    this.masonryInstance = undefined;
     this.hasMore = true;
     this.limit = 20;
     this.page = 1;
@@ -38,8 +40,11 @@ class WallContainer extends React.Component {
         this.page = this.preservedPage;
         this.hasMore = this.preservedHasMore;
       }
+      ReactDOM.findDOMNode(this.masonryInstance).scrollIntoView()
     }
   }
+
+  getInstanceRef = node => this.masonryInstance = node;
 
   loadMore = () => {
     let params = {
@@ -65,12 +70,13 @@ class WallContainer extends React.Component {
 
   render () {
     const pics = this.props.mode.userIdToShow ?
-          this.props.pics
+        this.props.pics
           .filter(pic => pic.owner._id === this.props.mode.userIdToShow) :
-          this.props.pics;
+        this.props.pics;
 
     return (
         <Wall
+            getInstanceRef={this.getInstanceRef}
             hasMore={this.hasMore}
             loadMore={this.loadMore}
             pageStart={this.page}

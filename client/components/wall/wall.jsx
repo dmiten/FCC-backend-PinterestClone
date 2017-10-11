@@ -18,8 +18,9 @@ export const Wall = (props) => {
           hasMore={props.hasMore}
           loadMore={props.loadMore}
           pageStart={props.pageStart}
-          style={{ margin: "auto" }}
           sizes={sizes}
+          style={{ margin: "auto" }}
+          ref={props.getInstanceRef}
           pack={true}
       >
         {

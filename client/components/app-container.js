@@ -2,13 +2,13 @@
 
 import React from "react";
 import { connect } from "react-redux";
+import ScrollToTop from "react-scroll-up";
 
 import {
-  Navbar
+  AddPic,
+  Navbar,
+  Wall
 } from "../components";
-
-import { AddPic } from "../components";
-import { Wall } from "../components";
 
 const mapStateToProps = state => {
   return {
@@ -29,6 +29,9 @@ class AppContainer extends React.Component {
                 null
             }
           <Wall />
+          <ScrollToTop showUnder={160}>
+            <b>UP</b>
+          </ScrollToTop>
         </div>
     )
   }

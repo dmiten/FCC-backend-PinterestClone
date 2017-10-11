@@ -1,0 +1,33 @@
+.panel-body {
+  padding: 7px;
+}
+
+.picbutton {
+  display: inline-block;
+  font-size: 90%;
+  height: 48px;
+  width: 48px;
+  padding: 0;
+}
+
+#picalttext {
+  font-size: 90%;
+  margin: 3px;
+}
+
+#picbuttons {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#picdiv {
+  width: 220px;
+}
+
+#picpanel {
+  box-shadow: inset 0px 0px 10px rgb(21, 61, 80);
+}
+
+#picpanel:hover {
+  box-shadow: inset 0px 0px 10px rgb(23, 74, 95);
+}

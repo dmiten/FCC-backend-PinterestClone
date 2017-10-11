@@ -1,0 +1,27 @@
+@media (min-width: 768px) {
+  .navbar-nav > li > a {
+    padding-top: 35px;
+    padding-bottom: 45px;
+  }
+}
+
+.navbar-toggle {
+  padding: 10px !important;
+}
+
+#discribe {
+  font-size: 48%;
+}
+
+#branding {
+  color: white;
+  margin-left: 10px;
+}
+
+#githublogo {
+  color: deepskyblue;
+}
+
+#name {
+  font-size: 300%;
+}

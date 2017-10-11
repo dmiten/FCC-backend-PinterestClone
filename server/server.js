@@ -10,6 +10,9 @@ import https from "https";
 import session from "express-session";
 import winston from "winston";
 
+import mongoose from "mongoose";
+import MongoStore from "connect-mongo";
+
 // ▼--------------- { cert: cert.pem, key: key.pem } for HTTPS or falsy for HTTP
 import { getCredentials } from "./.data/credentials";
 import { dbStart } from "./handledb";
@@ -40,7 +43,6 @@ export function serverStart() { // ◄------------------------------------------
 }
 
 export function serverApp(credentials) { // ◄-----------------------------------
-
   let app = express(),
       passport = makePassport(),
       httpApp,
@@ -62,6 +64,7 @@ export function serverApp(credentials) { // ◄---------------------------------
     secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: true,
+    store: new (MongoStore(session))({ db: mongoose.connection.db })
   }));
 
   app.use(passport.initialize());

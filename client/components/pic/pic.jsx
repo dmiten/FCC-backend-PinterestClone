@@ -12,6 +12,7 @@ import {
 import "./pic.css";
 
 export const Pic = (props) => {
+
   const isLiked = () => { // ◄--------------------------------------------------
     return props.pic.likes.indexOf(props.user._id) !== -1;
   };
@@ -20,26 +21,45 @@ export const Pic = (props) => {
     document.getElementById("image").src = "broken-image-stub.jpg";
   };
 
+  const authErrorTooltip = button => { // ◄-------------------------------------
+    if (props.authError) {
+      return (
+          <OverlayTrigger
+              placement="top"
+              overlay={
+                <Tooltip id="autherrortooltip">
+                  auth error
+                </Tooltip>
+              }
+          >
+            {button}
+          </OverlayTrigger>
+      )
+    } else {
+      return button
+    }
+  };
+
   const ownerButton = ( // ◄----------------------------------------------------
-      <Button
-          className="picbutton"
-          onClick={props.selectUserHandler}
+      <OverlayTrigger
+          placement="top"
+          overlay={
+            <Tooltip id="ownertooltip">
+              {props.pic.owner.username}
+            </Tooltip>
+          }
       >
-        <OverlayTrigger
-            placement="top"
-            overlay={
-              <Tooltip id="tooltip">
-                {props.pic.owner.username}
-              </Tooltip>
-            }
-        >
-          <Image
-              responsive
-              rounded
-              src={props.pic.owner.profilePhoto || "no-avatar-stub.jpg"}
-          />
-        </OverlayTrigger>
-      </Button>
+          <Button
+              className="picbutton"
+              onClick={props.selectUserHandler}
+          >
+              <Image
+                  responsive
+                  rounded
+                  src={props.pic.owner.profilePhoto || "no-avatar-stub.jpg"}
+              />
+        </Button>
+      </OverlayTrigger>
   );
 
   const delButton = ( // ◄------------------------------------------------------
@@ -88,8 +108,9 @@ export const Pic = (props) => {
           </div>
           <div id="picbuttons">
             {ownerButton}
-            {props.pic.owner._id === props.user._id ? delButton : null}
-            {likeButton}
+            {props.pic.owner._id === props.user._id ?
+                authErrorTooltip(delButton) : null}
+            {authErrorTooltip(likeButton)}
           </div>
         </Panel>
       </div>

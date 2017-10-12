@@ -17,6 +17,7 @@ const mapStateToProps = state => ({
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const { dispatch } = dispatchProps;
+  let authError = false;
   return ({
     ...stateProps,
     ...ownProps,
@@ -37,6 +38,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
       .then(result => {
         if (result.message === "pic updated") {
           dispatch(picUpdate(_pic))
+        } else {
+          authError = true
         }
       })
     },
@@ -47,10 +50,14 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
         .then(result => {
           if (result.message === "pic deleted") {
             dispatch(picDelete(ownProps.pic))
+          } else {
+            authError = true
           }
         })
       }
-    }
+    },
+
+    authError: authError
 
   })
 };

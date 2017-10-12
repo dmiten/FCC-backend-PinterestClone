@@ -3,7 +3,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { connect } from "react-redux";
-import ImagesLoaded from "imagesloaded";
+import imagesLoaded from "imagesloaded";
 
 import { picAdd } from "../../actions/pics-actions";
 import { fetchPics } from "../../actions/utils";
@@ -17,7 +17,6 @@ class WallContainer extends React.Component {
 
   constructor(props) {
     super(props);
-    this.imagesLoaded = undefined;
     this.masonryInstance = undefined;
     this.hasMore = true;
     this.limit = 20;
@@ -28,8 +27,7 @@ class WallContainer extends React.Component {
 
   componentWillReceiveProps(nextProps) { // ◄-----------------------------------
 
-    this.imagesLoaded = new ImagesLoaded(".picimage");
-    this.imagesLoaded.on("always", this.onAlwaysimagesLoaded);
+    imagesLoaded(".picimage", () => this.masonryInstance.forcePack());
 
     if (nextProps.mode.userIdToShow !== this.props.mode.userIdToShow) {
       if (!this.props.mode.userIdToShow && nextProps.mode.userIdToShow) {
@@ -51,11 +49,6 @@ class WallContainer extends React.Component {
   }
 
   getInstanceRef = node => this.masonryInstance = node; // ◄--------------------
-
-  onAlwaysimagesLoaded = () => { // ◄-------------------------------------------
-    this.masonryInstance.forcePack();
-    this.imagesLoaded.off("always", this.onAlwaysimagesLoaded)
-  };
 
   loadMore = () => { // ◄-------------------------------------------------------
     let params = {

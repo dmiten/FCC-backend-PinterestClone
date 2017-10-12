@@ -9,14 +9,14 @@ import {
   userSignOut
 } from "../../actions/user-actions";
 
-const mapStateToProps = state => {
+const mapStateToProps = state => { // ◄-----------------------------------------
   return {
     displayName: state.user.displayName,
     userId: state.user._id
   };
 };
 
-const mergeProps = (stateProps, dispatchProps) => {
+const mergeProps = (stateProps, dispatchProps) => { // ◄------------------------
   const { dispatch } = dispatchProps,
         menuItems = stateProps.displayName ?
           [

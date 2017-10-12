@@ -65,7 +65,7 @@ class AddPicContainer extends React.Component {
     }
   };
 
-  render() {
+  render() { // ◄---------------------------------------------------------------
     return (
         <AddPic
             open={this.state.open}

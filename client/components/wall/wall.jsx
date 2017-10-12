@@ -5,7 +5,7 @@ import MasonryInfiniteScroller from "react-masonry-infinite";
 
 import { Pic } from "../../components";
 
-const sizes = [
+const sizes = [ // ◄------------------------------------------------------------
   {columns: 1, gutter: 15},
   {mq: "600px", columns: 2, gutter: 15},
   {mq: "768px", columns: 3, gutter: 15},

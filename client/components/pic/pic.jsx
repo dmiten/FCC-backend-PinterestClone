@@ -86,7 +86,7 @@ export const Pic = (props) => {
       </Button>
   );
 
-  return (
+  return ( // ◄-----------------------------------------------------------------
       <div id="picdiv">
         <Panel
             bsStyle="primary"
@@ -96,6 +96,7 @@ export const Pic = (props) => {
               responsive
               rounded
               id="image"
+              className="picimage"
               src={props.pic.url}
               alt={props.pic.alt}
               onError={handleImageError}

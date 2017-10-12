@@ -6,7 +6,7 @@ import { serverLog } from "./server.js";
 
 mongoose.Promise = global.Promise;
 
-export function dbStart() {
+export function dbStart() { // ◄------------------------------------------------
 
   let mongodb = process.env.MONGOLAB_URI || "mongodb://localhost:27017",
       promisedMongoose = mongoose.connect(mongodb, { useMongoClient: true })

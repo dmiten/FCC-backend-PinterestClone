@@ -3,6 +3,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { connect } from "react-redux";
+import ImagesLoaded from "imagesloaded";
 
 import { picAdd } from "../../actions/pics-actions";
 import { fetchPics } from "../../actions/utils";
@@ -16,6 +17,7 @@ class WallContainer extends React.Component {
 
   constructor(props) {
     super(props);
+    this.imagesLoaded = undefined;
     this.masonryInstance = undefined;
     this.hasMore = true;
     this.limit = 20;
@@ -24,7 +26,11 @@ class WallContainer extends React.Component {
     this.preservedHasMore = undefined;
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps) { // ◄-----------------------------------
+
+    this.imagesLoaded = new ImagesLoaded(".picimage");
+    this.imagesLoaded.on("always", this.onAlwaysimagesLoaded);
+
     if (nextProps.mode.userIdToShow !== this.props.mode.userIdToShow) {
       if (!this.props.mode.userIdToShow && nextProps.mode.userIdToShow) {
         this.preservedPage = this.page;
@@ -44,9 +50,14 @@ class WallContainer extends React.Component {
     }
   }
 
-  getInstanceRef = node => this.masonryInstance = node;
+  getInstanceRef = node => this.masonryInstance = node; // ◄--------------------
 
-  loadMore = () => {
+  onAlwaysimagesLoaded = () => { // ◄-------------------------------------------
+    this.masonryInstance.forcePack();
+    this.imagesLoaded.off("always", this.onAlwaysimagesLoaded)
+  };
+
+  loadMore = () => { // ◄-------------------------------------------------------
     let params = {
       options: {
         limit: this.limit,
@@ -68,7 +79,7 @@ class WallContainer extends React.Component {
     .catch(err => console.log(err))
   };
 
-  render () {
+  render () { // ◄--------------------------------------------------------------
     const pics = this.props.mode.userIdToShow ?
         this.props.pics
           .filter(pic => pic.owner._id === this.props.mode.userIdToShow) :

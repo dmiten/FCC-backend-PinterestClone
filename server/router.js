@@ -30,11 +30,11 @@ export default function router(app, passport) {
       (req, res, next) => userCtrl.mustAuth(req, res, next),
       (req, res, next) => picCtrl.delete(req, res, next));
 
-  app.use((req, res, next) => {
+  app.use((req, res) => {
     res.status(404).send("Wrong address used.");
   });
 
-  app.use((err, req, res, next) => {
+  app.use((err, req, res) => {
     res.status(500).send("Internal server error.");
   });
 };

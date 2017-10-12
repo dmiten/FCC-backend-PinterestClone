@@ -5,7 +5,7 @@ import React from "react";
 import "../shared.css";
 import "./navbar.css";
 
-export const Branding = () => { // ◄--------------------------------------------
+export const Branding = () => {
 
   return (
       <div id="branding">

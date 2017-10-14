@@ -55,7 +55,7 @@ class WallContainer extends React.Component {
       options: {
         limit: this.limit,
         page: this.page,
-        sort: {created: -1}
+        sort: { created: -1 }
       },
       query: {"owner._id": this.props.mode.userIdToShow}
     };

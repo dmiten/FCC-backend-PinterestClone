@@ -21,25 +21,6 @@ export const Pic = (props) => {
     document.getElementById("image").src = "broken-image-stub.jpg";
   };
 
-  const authErrorTooltip = button => { // ◄-------------------------------------
-    if (props.authError) {
-      return (
-          <OverlayTrigger
-              placement="top"
-              overlay={
-                <Tooltip id="autherrortooltip">
-                  auth error
-                </Tooltip>
-              }
-          >
-            {button}
-          </OverlayTrigger>
-      )
-    } else {
-      return button
-    }
-  };
-
   const ownerButton = ( // ◄----------------------------------------------------
       <OverlayTrigger
           placement="top"
@@ -109,9 +90,8 @@ export const Pic = (props) => {
           </div>
           <div id="picbuttons">
             {ownerButton}
-            {props.pic.owner._id === props.user._id ?
-                authErrorTooltip(delButton) : null}
-            {authErrorTooltip(likeButton)}
+            {props.pic.owner._id === props.user._id ? delButton : null}
+            {likeButton}
           </div>
         </Panel>
       </div>

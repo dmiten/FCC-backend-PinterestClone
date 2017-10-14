@@ -11,13 +11,11 @@ userCtrl.withTwitter = (req, res, next, passport) => { // ◄-------------------
 userCtrl.withTwitterCallback = (req, res, next, passport) => { // ◄-------------
   passport.authenticate("twitter", (err, user) => {
     if (err) {
-//      return next(err);
-      console.log(err)
+      return next(err);
     } else {
       req.login(user, err => {
         if (err) {
-//          return next(err);
-          console.log(err)
+          return next(err);
         } else {
           serverLog("info", "userCtrl.withTwitterCallback - user " +
               user._id + " signed in");
@@ -31,7 +29,7 @@ userCtrl.withTwitterCallback = (req, res, next, passport) => { // ◄-----------
 userCtrl.mustAuth = (req, res, next) => { // ◄----------------------------------
   req.isAuthenticated() ?
       next() :
-      res.redirect("/");
+      res.json({ message: "auth error" });
 };
 
 userCtrl.signout = (req, res) => { // ◄-----------------------------------------

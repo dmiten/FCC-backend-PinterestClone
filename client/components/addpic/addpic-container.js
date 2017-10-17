@@ -53,7 +53,11 @@ class AddPicContainer extends React.Component {
         .then(result => {
           if (result.pic && result.message) {
             this.props.dispatch(picAdd([result.pic]));
-            this.setState({ serviceMessage: result.message });
+            this.setState({
+              altvalue: "",
+              urlvalue: "",
+              serviceMessage: result.message
+            });
           } else {
             this.setState({ serviceMessage: "auth error" });
           }

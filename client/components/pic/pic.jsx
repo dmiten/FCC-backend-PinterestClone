@@ -19,6 +19,7 @@ export const Pic = (props) => {
 
   const handleImageError = () => { // ◄-----------------------------------------
     document.getElementById("image").src = "broken-image-stub.jpg";
+    props.updateMasonry();
   };
 
   const ownerButton = ( // ◄----------------------------------------------------
@@ -81,6 +82,7 @@ export const Pic = (props) => {
               src={props.pic.url}
               alt={props.pic.alt}
               onError={handleImageError}
+              onLoad={props.updateMasonry}
           />
           <div
               className="text-center"

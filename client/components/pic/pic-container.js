@@ -11,8 +11,8 @@ import {
   picUpdateDb
 } from "../../actions/utils";
 
-const mapStateToProps = state => ({
-  ...state
+const mapStateToProps = stateProps => ({
+  ...stateProps
 });
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {

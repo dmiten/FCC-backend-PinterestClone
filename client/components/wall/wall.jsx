@@ -26,6 +26,7 @@ export const Wall = (props) => {
         {
           props.pics.map(pic =>
               <Pic
+                  {...props}
                   key={pic._id}
                   pic={pic}
               />

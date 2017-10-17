@@ -3,7 +3,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { connect } from "react-redux";
-import imagesLoaded from "imagesloaded";
 
 import { picAdd } from "../../actions/pics-actions";
 import { fetchPics } from "../../actions/utils";
@@ -26,9 +25,6 @@ class WallContainer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) { // ◄-----------------------------------
-
-    imagesLoaded(".picimage", () => this.masonryInstance.forcePack());
-
     if (nextProps.mode.userIdToShow !== this.props.mode.userIdToShow) {
       if (!this.props.mode.userIdToShow && nextProps.mode.userIdToShow) {
         this.preservedPage = this.page;
@@ -49,6 +45,10 @@ class WallContainer extends React.Component {
   }
 
   getInstanceRef = node => this.masonryInstance = node; // ◄--------------------
+
+  updateMasonry = () => { // ◄--------------------------------------------------
+    this.masonryInstance.forcePack()
+  };
 
   loadMore = () => { // ◄-------------------------------------------------------
     let params = {
@@ -85,6 +85,7 @@ class WallContainer extends React.Component {
             loadMore={this.loadMore}
             pageStart={this.page}
             pics={pics}
+            updateMasonry={this.updateMasonry}
         />
     )
   }
